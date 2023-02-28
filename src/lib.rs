@@ -43,7 +43,7 @@ mod tests {
     #[test]
     fn bubble_sort_ascending_big() {
         let mut rng = rand::thread_rng();
-        let size = 10000;
+        let size = 1_000_000;
         let mut vec: Vec<u64> = (0..size).map(|_| rng.gen_range(0, 20)).collect();
         let mut vec_send = vec.clone();
         let res = sorts::bubble_sort::bubble_sort(&mut vec_send);
