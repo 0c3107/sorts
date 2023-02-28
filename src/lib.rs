@@ -25,6 +25,7 @@ mod sorts {
 
 #[cfg(test)]
 mod tests {
+    use std::i64::MIN;
     use super::*;
     use rand::Rng;
 
@@ -42,9 +43,10 @@ mod tests {
     }
     #[test]
     fn bubble_sort_ascending_big() {
+        use std::i64::{MAX, MIN};
         let mut rng = rand::thread_rng();
         let size = 10_000;
-        let mut vec: Vec<u64> = (0..size).map(|_| rng.gen_range(0, 20)).collect();
+        let mut vec: Vec<i64> = (0..size).map(|_| rng.gen_range(MIN, MAX)).collect();
         let mut vec_send = vec.clone();
         let res = sorts::bubble_sort::bubble_sort(&mut vec_send);
         vec.sort();
