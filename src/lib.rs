@@ -4,12 +4,10 @@ pub fn add(left: usize, right: usize) -> usize {
 
 mod sorts {
     pub mod bubble_sort {
-        use std::time::Instant;
 
         // Sorting a vector in ascending order
         #[allow(dead_code)]
         pub fn bubble_sort<T: Ord>(arr: &mut [T]) -> &mut [T] {
-            let now = Instant::now();
             for i in 0..arr.len() {
                 for j in 0..arr.len() - 1 - i {
                     if arr[j] > arr[j + 1] {
@@ -17,7 +15,6 @@ mod sorts {
                     }
                 }
             }
-            println!("{:?} has passed.",now.elapsed());
             arr
         }
     }
@@ -25,7 +22,7 @@ mod sorts {
 
 #[cfg(test)]
 mod tests {
-    use std::i64::MIN;
+    use std::i64::MAX;
     use super::*;
     use rand::Rng;
 
@@ -36,17 +33,17 @@ mod tests {
     }
     #[test]
     fn bubble_sort_ascending_small() {
-        let mut vec: Vec<isize> = vec![5, 4, 2, 3, 1];
-        let expect: Vec<isize> = vec![1,2,3,4,5];
-        let res = sorts::bubble_sort::bubble_sort(&mut vec);
-        assert_eq!(res, expect);
+        let mut vec = vec![5, 4, 2, 3, 1];
+        let mut vec_unsorted = vec.clone();
+        let res = sorts::bubble_sort::bubble_sort(&mut vec_unsorted).to_owned();
+        vec.sort();
+        assert_eq!(res, vec);
     }
     #[test]
     fn bubble_sort_ascending_big() {
-        use std::i64::{MAX, MIN};
         let mut rng = rand::thread_rng();
         let size = 10_000;
-        let mut vec: Vec<i64> = (0..size).map(|_| rng.gen_range(MIN, MAX)).collect();
+        let mut vec: Vec<i64> = (0..size).map(|_| rng.gen_range(i64::MIN, i64::MAX)).collect();
         let mut vec_send = vec.clone();
         let res = sorts::bubble_sort::bubble_sort(&mut vec_send);
         vec.sort();
