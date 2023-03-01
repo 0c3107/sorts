@@ -22,7 +22,6 @@ mod sorts {
 
 #[cfg(test)]
 mod tests {
-    use std::i64::MAX;
     use super::*;
     use rand::Rng;
 
